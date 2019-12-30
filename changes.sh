@@ -1,5 +1,5 @@
-sudo apt-get update
-sudo apt-get install firefox
+sudo apt-get update -y
+sudo apt-get install firefox -y
 timedatectl set-timezone America/Los_Angeles 
 sudo apt-get remove chromium-browser
 sudo apt-get purge chromium-browser
@@ -10,8 +10,84 @@ sudo apt-get remove xfce4
 sudo apt-get remove --auto-remove xfce4
 sudo apt-get purge xfce4
 sudo apt-get purge --auto-remove xfce4
-sudo apt install i3 xss-lock lightdm
+sudo apt install i3 xss-lock lightdm -y
 firefox -profile ~/.mozilla/firefox/default.Default
 wget https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js ~
 firefox -profile ~/.mozilla/firefox/default.Default
 rfkill block bluetooth
+sudo apt-get install git netfilter-persistent whois gedit -y
+git config --global user.email "test1@test1.test1"
+git config --global user.name "test1"
+
+#iptables rules
+sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG NONE -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,SYN FIN,SYN -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags SYN,RST SYN,RST -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,RST FIN,RST -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,ACK FIN -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ACK,URG URG -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ACK,FIN FIN -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ACK,PSH PSH -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL ALL -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL NONE -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL FIN,PSH,URG -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL SYN,FIN,PSH,URG -j DROP
+sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL SYN,RST,ACK,FIN,URG -j DROP
+
+#block outgoing SMTP mail
+sudo iptables -A OUTPUT -p tcp --dport 25 -j REJECT
+
+#block outgoing connections to facebook
+whois -h v4.whois.cymru.com " -v $(host facebook.com | grep "has address" | cut -d " " -f4)" | tail -n1 | awk '{print $1}'
+for i in $(whois -h whois.radb.net -- '-i origin AS32934' | grep "^route:" | cut -d ":" -f2 | sed -e 's/^[ \t]*//' | sort -n -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 | cut -d ":" -f2 | sed 's/$/;/') ; do
+
+  sudo iptables -A OUTPUT -s "$i" -j REJECT
+
+done
+#protect against port scanning
+sudo iptables -N port-scanning
+sudo iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 1/s --limit-burst 2 -j RETURN
+sudo iptables -A port-scanning -j DROP
+
+#ssh bruteforce protection
+sudo iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --set
+sudo iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
+
+#synflood protection
+sudo iptables -N syn_flood
+sudo iptables -A INPUT -p tcp --syn -j syn_flood
+sudo iptables -A syn_flood -m limit --limit 1/s --limit-burst 3 -j RETURN
+sudo iptables -A syn_flood -j DROP
+sudo iptables -A INPUT -p icmp -m limit --limit  1/s --limit-burst 1 -j ACCEPT
+sudo iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 1 -j LOG --log-prefix PING-DROP:
+sudo iptables -A INPUT -p icmp -j DROP
+sudo iptables -A OUTPUT -p icmp -j ACCEPT
+
+#mitigating SYN floods with synproxy
+sudo iptables -t raw -A PREROUTING -p tcp -m tcp --syn -j CT --notrack
+sudo iptables -A INPUT -p tcp -m tcp -m conntrack --ctstate INVALID,UNTRACKED -j SYNPROXY --sack-perm --timestamp --wscale 7 --mss 1460
+sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+
+##Block packets from private subnets
+#_subnets=("224.0.0.0/3" "169.254.0.0/16" "172.16.0.0/12" "192.0.2.0/24" "192.168.0.0/16" "10.0.0.0/8" "0.0.0.0/8" "240.0.0.0/5")
+#
+#for _sub in "${_subnets[@]}" ; do
+#  sudo iptables -t mangle -A PREROUTING -s "$_sub" -j DROP
+#done
+#sudo iptables -t mangle -A PREROUTING -s 127.0.0.0/8 ! -i lo -j DROP
+#
+#block uncommon MSS value
+sudo iptables -t mangle -A PREROUTING -p tcp -m conntrack --ctstate NEW -m tcpmss ! --mss 536:65535 -j DROP
+
+#drop all null packets
+sudo iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
+
+#drop xmas packets
+sudo iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
+
+#Block New Packets That Are Not SYN
+sudo iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
+
+#save rules
+#sudo netfilter-persistent save
