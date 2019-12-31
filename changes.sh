@@ -17,11 +17,11 @@ cd /tmp/JShielder && sudo ./jshielder.sh
 
 #linux hardening script
 git clone https://github.com/ismailtasdelen/Anti-DDOS.git /tmp
-cd Anti-DDOS && bash ./anti-ddos.sh 
+cd /tmp/Anti-DDOS && bash ./anti-ddos.sh 
 
 #linux hardening script
 git clone https://github.com/konstruktoid/hardening.git /tmp
-cd hardening && cd tests && sudo bats .
+cd /tmp/hardening && cd tests && sudo bats .
 
 #anti-ddos
 git clone https://github.com/ismailtasdelen/Anti-DDOS.git /tmp
@@ -30,10 +30,8 @@ cd /tmp/Anti-DDOS/ && bash ./anti-ddos.sh
 #audit linux system
 git clone https://github.com/CISOfy/lynis /tmp
 cd /tmp/lynis/
-sudo chown -R 0:0 lynis
+sudo chown -R 0:0 /tmp/lynis
 ./lynis audit system > /tmp/lynis/audit.txt
-
-
 
 #iptables rules
 sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
