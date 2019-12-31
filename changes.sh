@@ -1,23 +1,39 @@
 sudo apt-get update -y
-sudo apt-get install firefox -y
+sudo apt-get install i3 xss-lock lightdm firefox git netfilter-persistent whois gedit -y
 timedatectl set-timezone America/Los_Angeles 
-sudo apt-get remove chromium-browser
-sudo apt-get purge chromium-browser
-sudo apt-get purge --auto-remove chromium-browser
-sudo apt-get purge cups-daemon
-sudo apt-get purge --auto-remove cups-daemon
-sudo apt-get remove xfce4
-sudo apt-get remove --auto-remove xfce4
-sudo apt-get purge xfce4
-sudo apt-get purge --auto-remove xfce4
-sudo apt install i3 xss-lock lightdm -y
+sudo apt-get remove chromium-browser xfce4 cups-daemon
+sudo apt-get purge chromium-browser xfce4 cups-daemon
+sudo apt-get purge --auto-remove chromium-browser xfce4 cups-daemon
 firefox -profile ~/.mozilla/firefox/default.Default
 wget https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js ~
 firefox -profile ~/.mozilla/firefox/default.Default
 rfkill block bluetooth
-sudo apt-get install git netfilter-persistent whois gedit -y
 git config --global user.email "test1@test1.test1"
 git config --global user.name "test1"
+
+#Linux hardening script
+git clone https://github.com/Jsitech/JShielder.git /tmp
+cd /tmp/JShielder && sudo ./jshielder.sh 
+
+#linux hardening script
+git clone https://github.com/ismailtasdelen/Anti-DDOS.git /tmp
+cd Anti-DDOS && bash ./anti-ddos.sh 
+
+#linux hardening script
+git clone https://github.com/konstruktoid/hardening.git /tmp
+cd hardening && cd tests && sudo bats .
+
+#anti-ddos
+git clone https://github.com/ismailtasdelen/Anti-DDOS.git /tmp
+cd /tmp/Anti-DDOS/ && bash ./anti-ddos.sh 
+
+#audit linux system
+git clone https://github.com/CISOfy/lynis /tmp
+cd /tmp/lynis/
+sudo chown -R 0:0 lynis
+./lynis audit system > /tmp/lynis/audit.txt
+
+
 
 #iptables rules
 sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
