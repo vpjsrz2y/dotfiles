@@ -1,37 +1,15 @@
 sudo apt-get update -y
 sudo apt-get install i3 xss-lock lightdm firefox git netfilter-persistent whois gedit -y
 timedatectl set-timezone America/Los_Angeles 
-sudo apt-get remove chromium-browser xfce4 cups-daemon
-sudo apt-get purge chromium-browser xfce4 cups-daemon
-sudo apt-get purge --auto-remove chromium-browser xfce4 cups-daemon
+sudo apt-get remove chromium-browser xfce4 cups-daemon -y
+sudo apt-get purge chromium-browser xfce4 cups-daemon -y
+sudo apt-get purge --auto-remove chromium-browser xfce4 cups-daemon -y
 firefox -profile ~/.mozilla/firefox/default.Default
 wget https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js ~
 firefox -profile ~/.mozilla/firefox/default.Default
 rfkill block bluetooth
 git config --global user.email "test1@test1.test1"
 git config --global user.name "test1"
-
-#Linux hardening script
-git clone https://github.com/Jsitech/JShielder.git /tmp
-cd /tmp/JShielder && sudo ./jshielder.sh 
-
-#linux hardening script
-git clone https://github.com/ismailtasdelen/Anti-DDOS.git /tmp
-cd /tmp/Anti-DDOS && bash ./anti-ddos.sh 
-
-#linux hardening script
-git clone https://github.com/konstruktoid/hardening.git /tmp
-cd /tmp/hardening && cd tests && sudo bats .
-
-#anti-ddos
-git clone https://github.com/ismailtasdelen/Anti-DDOS.git /tmp
-cd /tmp/Anti-DDOS/ && bash ./anti-ddos.sh 
-
-#audit linux system
-git clone https://github.com/CISOfy/lynis /tmp
-cd /tmp/lynis/
-sudo chown -R 0:0 /tmp/lynis
-./lynis audit system > /tmp/lynis/audit.txt
 
 #iptables rules
 sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
@@ -103,5 +81,27 @@ sudo iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
 #Block New Packets That Are Not SYN
 sudo iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
 
+#Linux hardening script
+cd /tmp && git clone https://github.com/Jsitech/JShielder.git
+cd /tmp/JShielder && sudo ./jshielder.sh 
+
+#linux hardening script
+cd /tmp && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
+cd /tmp/Anti-DDOS && bash ./anti-ddos.sh 
+
+#linux hardening script
+cd /tmp && git clone https://github.com/konstruktoid/hardening.git
+cd /tmp/hardening && cd tests && sudo bats .
+
+#anti-ddos
+cd /tmp && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
+cd /tmp/Anti-DDOS/ && bash ./anti-ddos.sh 
+
+#audit linux system
+cd /tmp && git clone https://github.com/CISOfy/lynis
+cd /tmp/lynis/
+sudo chown -R 0:0 /tmp/lynis
+./lynis audit system > /tmp/lynis/audit.txt
+
 #save rules
-#sudo netfilter-persistent save
+sudo netfilter-persistent save
