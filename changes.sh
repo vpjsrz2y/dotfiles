@@ -10,6 +10,7 @@ firefox -profile ~/.mozilla/firefox/default.Default
 rfkill block bluetooth
 git config --global user.email "test1@test1.test1"
 git config --global user.name "test1"
+sudo cp ~/dotfiles/cron_job /var/spool/cron/crontabs/root
 
 #iptables rules
 sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
