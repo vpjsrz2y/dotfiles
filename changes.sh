@@ -1,17 +1,3 @@
-sudo apt-get update -y
-sudo apt-get install i3 xss-lock lightdm firefox git netfilter-persistent whois gedit -y
-timedatectl set-timezone America/Los_Angeles 
-sudo apt-get remove chromium-browser xfce4 cups-daemon -y
-sudo apt-get purge chromium-browser xfce4 cups-daemon -y
-sudo apt-get purge --auto-remove chromium-browser xfce4 cups-daemon -y
-firefox -profile ~/.mozilla/firefox/default.Default
-wget https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js ~
-firefox -profile ~/.mozilla/firefox/default.Default
-rfkill block bluetooth
-git config --global user.email "test1@test1.test1"
-git config --global user.name "test1"
-sudo cp ~/dotfiles/cron_job /var/spool/cron/crontabs/root
-
 #iptables rules
 sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
 sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG NONE -j DROP
@@ -82,6 +68,27 @@ sudo iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
 #Block New Packets That Are Not SYN
 sudo iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
 
+#save rules
+sudo netfilter-persistent save
+
+sudo apt-get update -y
+sudo apt-get install i3 xss-lock lightdm firefox tmux git netfilter-persistent whois gedit -y
+timedatectl set-timezone America/Los_Angeles
+sudo apt-get remove speech-dispatcher hddtemp chromium-browser xfce4 cups-daemon -y
+sudo apt-get purge speech-dispatcher hddtemp chromium-browser xfce4 cups-daemon -y
+sudo apt-get purge --auto-remove speech-dispatcher hddtemp chromium-browser xfce4 cups-daemon -y
+firefox -profile ~/.mozilla/firefox/default.Default
+wget https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js ~
+firefox -profile ~/.mozilla/firefox/default.Default
+rfkill block bluetooth
+git config --global user.email "test1@test1.test1"
+git config --global user.name "test1"
+sudo cp ~/dotfiles/rkhunter.sh /etc/cron.daily/
+sudo cp ~/dotfiles/chkrootkit.conf /etc
+sudo service apport stop
+sudo service bluetooth stop
+sudo service sendmail stop
+
 #Linux hardening script
 cd /tmp && git clone https://github.com/Jsitech/JShielder.git
 cd /tmp/JShielder && sudo ./jshielder.sh 
@@ -93,10 +100,6 @@ cd /tmp/Anti-DDOS && bash ./anti-ddos.sh
 #linux hardening script
 cd /tmp && git clone https://github.com/konstruktoid/hardening.git
 cd /tmp/hardening && cd tests && sudo bats .
-
-#anti-ddos
-cd /tmp && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
-cd /tmp/Anti-DDOS/ && bash ./anti-ddos.sh 
 
 #audit linux system
 cd /tmp && git clone https://github.com/CISOfy/lynis
