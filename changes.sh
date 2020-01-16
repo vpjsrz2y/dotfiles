@@ -88,6 +88,13 @@ sudo cp ~/dotfiles/chkrootkit.conf /etc
 sudo service apport stop
 sudo service bluetooth stop
 sudo service sendmail stop
+sudo cp 00-default.link /etc/systemd/network
+sudo apt-get install -y openvpn dialog python3-pip python3-setuptools
+sudo pip3 install protonvpn-cli
+#OpenVPN username: lJxWeohM1oFl-i3BocgphX-u
+#OpenVPN password: DZCmmZDSV7XmOy86L8cen8px
+sudo protonvpn init
+sudo protonvpn c -r
 
 #Linux hardening script
 cd /tmp && git clone https://github.com/Jsitech/JShielder.git
