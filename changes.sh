@@ -82,9 +82,9 @@ sudo protonvpn c -r
 sudo apt-get update -y
 sudo apt-get install i3 xss-lock lightdm firefox tmux git netfilter-persistent whois gedit -y
 timedatectl set-timezone America/Los_Angeles
-sudo apt-get remove speech-dispatcher hddtemp chromium-browser xfce4 cups-daemon -y
-sudo apt-get purge speech-dispatcher hddtemp chromium-browser xfce4 cups-daemon -y
-sudo apt-get purge --auto-remove speech-dispatcher hddtemp chromium-browser xfce4 cups-daemon -y
+sudo apt-get remove speech-dispatcher hddtemp chromium-browser xfce4 cups-daemon "bluez*" obex-data-server libopenobex -y
+sudo apt-get purge speech-dispatcher hddtemp chromium-browser xfce4 cups-daemon "bluez*" obex-data-server libopenobex -y
+sudo apt-get purge --auto-remove speech-dispatcher hddtemp chromium-browser xfce4 cups-daemon "bluez*" obex-data-server libopenobex -y
 firefox -profile ~/.mozilla/firefox/default.Default
 wget https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js ~
 firefox -profile ~/.mozilla/firefox/default.Default
