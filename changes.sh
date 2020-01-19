@@ -97,12 +97,11 @@ sudo service apport stop
 sudo service bluetooth stop
 sudo /etc/init.d/sendmail stop
 sudo cp 00-default.link /etc/systemd/network
-sudo apt-get install -y openvpn dialog python3-pip python3-setuptools
-sudo pip3 install protonvpn-cli
-#OpenVPN username: lJxWeohM1oFl-i3BocgphX-u
-#OpenVPN password: DZCmmZDSV7XmOy86L8cen8px
-sudo protonvpn init
-sudo protonvpn c -r
+
+#install signal
+curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
+echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
+sudo apt update && sudo apt install signal-desktop
 
 #Linux hardening script
 cd /tmp && git clone https://github.com/Jsitech/JShielder.git
