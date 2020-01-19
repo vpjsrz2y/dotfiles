@@ -73,6 +73,9 @@ sudo netfilter-persistent save
 
 #install passphraseme
 sudo apt-get install -y openvpn dialog python3-pip python3-setuptools
+sudo pip3 install passphraseme
+
+#install protonvpn
 sudo pip3 install protonvpn-cli
 #OpenVPN username: lJxWeohM1oFl-i3BocgphX-u
 #OpenVPN password: DZCmmZDSV7XmOy86L8cen8px
