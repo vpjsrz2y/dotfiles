@@ -71,6 +71,14 @@ sudo iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
 #save rules
 sudo netfilter-persistent save
 
+#install passphraseme
+sudo apt-get install -y openvpn dialog python3-pip python3-setuptools
+sudo pip3 install protonvpn-cli
+#OpenVPN username: lJxWeohM1oFl-i3BocgphX-u
+#OpenVPN password: DZCmmZDSV7XmOy86L8cen8px
+sudo protonvpn init
+sudo protonvpn c -r
+
 sudo apt-get update -y
 sudo apt-get install i3 xss-lock lightdm firefox tmux git netfilter-persistent whois gedit -y
 timedatectl set-timezone America/Los_Angeles
