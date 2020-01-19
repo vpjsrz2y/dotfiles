@@ -95,7 +95,7 @@ sudo cp ~/dotfiles/rkhunter.sh /etc/cron.daily/
 sudo cp ~/dotfiles/chkrootkit.conf /etc
 sudo service apport stop
 sudo service bluetooth stop
-sudo service sendmail stop
+sudo /etc/init.d/sendmail stop
 sudo cp 00-default.link /etc/systemd/network
 sudo apt-get install -y openvpn dialog python3-pip python3-setuptools
 sudo pip3 install protonvpn-cli
