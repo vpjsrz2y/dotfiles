@@ -91,9 +91,10 @@ timedatectl set-timezone America/Los_Angeles
 sudo apt-get remove speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
 sudo apt-get purge speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
 sudo apt-get purge --auto-remove speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
-firefox -profile ~/.mozilla/firefox/default.Default
-wget https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js ~
-firefox -profile ~/.mozilla/firefox/default.Default
+
+#create firefox profile
+firefox -CreateProfile JoelUser
+wget -P ~/.mozilla/firefox/*.JoelUser https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js
 
 #configure git
 git config --global user.email "test1@test1.test1"
