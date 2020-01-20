@@ -95,13 +95,12 @@ sudo apt-get purge --auto-remove speech-dispatcher hddtemp chromium* xfce4 cups*
 firefox -profile ~/.mozilla/firefox/default.Default
 wget https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js ~
 firefox -profile ~/.mozilla/firefox/default.Default
-rfkill block bluetooth
 git config --global user.email "test1@test1.test1"
 git config --global user.name "test1"
 sudo cp ~/dotfiles/rkhunter.sh /etc/cron.daily/
 sudo cp ~/dotfiles/chkrootkit.conf /etc
 sudo service apport stop
-sudo service bluetooth stop
+#sudo service bluetooth stop
 sudo /etc/init.d/sendmail stop
 sudo cp 00-default.link /etc/systemd/network
 
