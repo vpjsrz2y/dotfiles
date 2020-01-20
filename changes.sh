@@ -23,10 +23,9 @@ sudo iptables -A OUTPUT -p tcp --dport 25 -j REJECT
 #block outgoing connections to facebook
 whois -h v4.whois.cymru.com " -v $(host facebook.com | grep "has address" | cut -d " " -f4)" | tail -n1 | awk '{print $1}'
 for i in $(whois -h whois.radb.net -- '-i origin AS32934' | grep "^route:" | cut -d ":" -f2 | sed -e 's/^[ \t]*//' | sort -n -t . -k 1,1 -k 2,2 -k 3,3 -k 4,4 | cut -d ":" -f2 | sed 's/$/;/') ; do
-
   sudo iptables -A OUTPUT -s "$i" -j REJECT
-
 done
+
 #protect against port scanning
 sudo iptables -N port-scanning
 sudo iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 1/s --limit-burst 2 -j RETURN
@@ -89,14 +88,18 @@ sudo protonvpn c -r
 sudo apt-get update -y
 sudo apt-get install i3 xss-lock lightdm firefox tmux git netfilter-persistent whois gedit -y
 timedatectl set-timezone America/Los_Angeles
-sudo apt-get remove speech-dispatcher hddtemp chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
-sudo apt-get purge speech-dispatcher hddtemp chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
-sudo apt-get purge --auto-remove speech-dispatcher hddtemp chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+sudo apt-get remove speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+sudo apt-get purge speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+sudo apt-get purge --auto-remove speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
 firefox -profile ~/.mozilla/firefox/default.Default
 wget https://raw.githubusercontent.com/pyllyukko/user.js/master/user.js ~
 firefox -profile ~/.mozilla/firefox/default.Default
+
+#configure git
 git config --global user.email "test1@test1.test1"
 git config --global user.name "test1"
+git config --global core.editor "vi"
+
 sudo cp ~/dotfiles/rkhunter.sh /etc/cron.daily/
 sudo cp ~/dotfiles/chkrootkit.conf /etc
 sudo service apport stop
