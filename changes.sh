@@ -105,7 +105,7 @@ sudo cp ~/dotfiles/chkrootkit.conf /etc
 sudo service apport stop
 #sudo service bluetooth stop
 sudo /etc/init.d/sendmail stop
-sudo cp 00-default.link /etc/systemd/network
+sudo cp ~/dotfiles/00-default.link /etc/systemd/network
 
 #install signal
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
