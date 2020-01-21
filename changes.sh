@@ -115,6 +115,9 @@ curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 sudo apt update && sudo apt install signal-desktop
 
+#create gpg.conf
+cp ~/dotfiles/gpg.conf ~/.gnupg
+
 #Linux hardening script
 cd /tmp && git clone https://github.com/Jsitech/JShielder.git
 cd /tmp/JShielder && sudo ./jshielder.sh 
