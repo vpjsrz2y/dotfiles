@@ -103,6 +103,8 @@ git config --global core.editor "vi"
 
 sudo cp ~/dotfiles/rkhunter.sh /etc/cron.daily/
 sudo cp ~/dotfiles/chkrootkit.conf /etc
+
+#stop services
 sudo service apport stop
 #sudo service bluetooth stop
 sudo /etc/init.d/sendmail stop
