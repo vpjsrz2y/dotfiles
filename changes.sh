@@ -86,11 +86,14 @@ sudo protonvpn c -r
 
 #update system
 sudo apt-get update -y
-sudo apt-get install i3 xss-lock lightdm firefox tmux git netfilter-persistent whois gedit -y
+sudo apt-get install vim i3 xss-lock lightdm firefox tmux git netfilter-persistent whois gedit -y
 timedatectl set-timezone America/Los_Angeles
-sudo apt-get remove scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
-sudo apt-get purge scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
-sudo apt-get purge --auto-remove scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+sudo apt-get remove vim-tiny scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+sudo apt-get purge vim-tiny scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+sudo apt-get purge --auto-remove vim-tiny scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+
+git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
+sh ~/.vim_runtime/install_awesome_vimrc.sh
 
 #create firefox profile
 firefox -CreateProfile JoelUser
