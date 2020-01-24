@@ -88,9 +88,9 @@ sudo protonvpn c -r
 sudo apt-get update -y
 sudo apt-get install i3 xss-lock lightdm firefox tmux git netfilter-persistent whois gedit -y
 timedatectl set-timezone America/Los_Angeles
-sudo apt-get remove speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
-sudo apt-get purge speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
-sudo apt-get purge --auto-remove speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+sudo apt-get remove scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+sudo apt-get purge scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
+sudo apt-get purge --auto-remove scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
 
 #create firefox profile
 firefox -CreateProfile JoelUser
