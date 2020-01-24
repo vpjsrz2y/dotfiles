@@ -118,13 +118,19 @@ sudo apt update && sudo apt install signal-desktop
 #create gpg.conf
 cp ~/dotfiles/gpg.conf ~/.gnupg
 
+#linux hardening script
+cd /tmp && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
+cd /tmp/Anti-DDOS && bash ./anti-ddos.sh 
+
+#save rules
+sudo netfilter-persistent save
+
 #Linux hardening script
 cd /tmp && git clone https://github.com/Jsitech/JShielder.git
 cd /tmp/JShielder && sudo ./jshielder.sh 
 
-#linux hardening script
-cd /tmp && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
-cd /tmp/Anti-DDOS && bash ./anti-ddos.sh 
+#save rules
+sudo netfilter-persistent save
 
 #linux hardening script
 cd /tmp && git clone https://github.com/konstruktoid/hardening.git
