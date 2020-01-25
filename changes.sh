@@ -86,11 +86,32 @@ sudo protonvpn c -r
 
 #update system
 sudo apt-get update -y
-sudo apt-get install vim i3 xss-lock lightdm firefox tmux git netfilter-persistent whois gedit -y
+##declare variable
+declare -a arr_install=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "netfilter-persistent" "whois" "gedit")
+declare -a arr_uninstall=("xfce4*" "xfconf" "xfce4-utils" "xfwm4" "xfce4-session" "xfdesktop4" "exo-utils" "xfce4-panel" "xfce4-terminal"  "thunar"
+"vim-tiny" "scrot" "mousepad" "onboard" "gnome-themes-*" "atril*" "orage" "catfish*" "gnome-calculator" "speech-dispatcher" "hddtemp" "nano" "chromium*" "xfce4" "cups*" "bluez*" "obex-data-server" "libopenobex")
+
+##loop over all programs
+for i in "${arr_install[@]}"
+do
+    echo "$i"
+    sudo apt-get install "$i" -y
+done
+
+for i in "${arr_uninstall[@]}"
+do
+    echo "$i"
+    sudo apt-get remove --auto-remove "$i" -y
+    sudo apt-get purge --auto-remove "$i" -y
+    sudo apt-get autoremove
+done
+
+sudo apt-get autoremove
+sudo apt-get -f install
+sudo apt-get clean
+sudo apt-get autoclean
+
 timedatectl set-timezone America/Los_Angeles
-sudo apt-get remove vim-tiny scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
-sudo apt-get purge vim-tiny scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
-sudo apt-get purge --auto-remove vim-tiny scrot mousepad onboard gnome-themes-* atril* orage catfish* gnome-calculator speech-dispatcher hddtemp nano chromium* xfce4 cups* bluez* obex-data-server libopenobex -y
 
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
