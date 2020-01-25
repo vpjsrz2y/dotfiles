@@ -113,6 +113,7 @@ sudo apt-get autoclean
 
 timedatectl set-timezone America/Los_Angeles
 
+#install vim and its libraries
 git clone --depth=1 https://github.com/amix/vimrc.git ~/.vim_runtime
 sh ~/.vim_runtime/install_awesome_vimrc.sh
 
@@ -123,7 +124,7 @@ wget -P ~/.mozilla/firefox/*.JoelUser https://raw.githubusercontent.com/pyllyukk
 #configure git
 git config --global user.email "test1@test1.test1"
 git config --global user.name "test1"
-git config --global core.editor "vi"
+git config --global core.editor "vim"
 
 sudo cp ~/dotfiles/rkhunter.sh /etc/cron.daily/
 sudo cp ~/dotfiles/chkrootkit.conf /etc
@@ -144,14 +145,14 @@ cp ~/dotfiles/gpg.conf ~/.gnupg
 
 #linux hardening script
 cd /tmp && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
-cd /tmp/Anti-DDOS && bash ./anti-ddos.sh 
+cd /tmp/Anti-DDOS && sudo bash ./anti-ddos.sh
 
 #save rules
 sudo netfilter-persistent save
 
 #Linux hardening script
 cd /tmp && git clone https://github.com/Jsitech/JShielder.git
-cd /tmp/JShielder && sudo ./jshielder.sh 
+cd /tmp/JShielder && sudo ./jshielder.sh
 
 #save rules
 sudo netfilter-persistent save
