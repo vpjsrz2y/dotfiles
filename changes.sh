@@ -144,29 +144,21 @@ sudo apt update && sudo apt install signal-desktop
 #create gpg.conf
 cp ~/dotfiles/gpg.conf ~/.gnupg
 
-#linux hardening script
-cd /tmp && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
-cd /tmp/Anti-DDOS && sudo bash ./anti-ddos.sh
-
 #save rules
 sudo netfilter-persistent save
 
-#Linux hardening script
-cd /tmp && git clone https://github.com/Jsitech/JShielder.git
-cd /tmp/JShielder && sudo ./jshielder.sh
-
-#save rules
-sudo netfilter-persistent save
+#clone scripts
+cd ~/dotfiles && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
+cd ~/dotfiles && git clone https://github.com/Jsitech/JShielder.git
+cd ~/dotfiles && git clone https://github.com/konstruktoid/hardening.git
+cd ~/dotfiles && git clone https://github.com/CISOfy/lynis
 
 #linux hardening script
-cd /tmp && git clone https://github.com/konstruktoid/hardening.git
-cd /tmp/hardening && cd tests && sudo bats .
-
-#audit linux system
-cd /tmp && git clone https://github.com/CISOfy/lynis
-cd /tmp/lynis/
-sudo chown -R 0:0 /tmp/lynis
-./lynis audit system > /tmp/lynis/audit.txt
-
-#save rules
+cd ~/dotfiles/Anti-DDOS && sudo bash ./anti-ddos.sh
 sudo netfilter-persistent save
+cd ~/dotfiles/JShielder && sudo ./jshielder.sh
+sudo netfilter-persistent save
+cd ~/dotfiles/hardening && cd tests && sudo bats .
+cd ~/dotfiles/lynis/
+sudo chown -R 0:0 ~/dotfiles/lynis
+./lynis audit system > ~dotfiles/lynis/audit.txt
