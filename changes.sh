@@ -1,3 +1,5 @@
+#!/bin/bash
+
 #remove cups
 sudo apt-get remove cups*
 
