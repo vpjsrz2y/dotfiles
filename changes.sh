@@ -89,18 +89,17 @@ sudo protonvpn c -r
 #update system
 sudo apt-get update -y
 ##declare variable
-declare -a arr_install=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "netfilter-persistent" "whois" "gedit")
-declare -a arr_uninstall=("xfce4*" "xfconf" "xfce4-utils" "xfwm4" "xfce4-session" "xfdesktop4" "exo-utils" "xfce4-panel" "xfce4-terminal"  "thunar"
-"vim-tiny" "scrot" "mousepad" "onboard" "gnome-themes-*" "atril*" "orage" "catfish*" "gnome-calculator" "speech-dispatcher" "hddtemp" "nano" "chromium*" "xfce4" "cups*" "bluez*" "obex-data-server" "libopenobex")
+declare -a arrinstall=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "netfilter-persistent" "whois" "gedit")
+declare -a arruninstall=("xfce4*" "xfconf" "xfce4-utils" "xfwm4" "xfce4-session" "xfdesktop4" "exo-utils" "xfce4-panel" "xfce4-terminal"  "thunar" "compton" "gnome-screenshot" "gnome-screensaver" "vim-tiny" "scrot" "mousepad" "onboard" "gnome-themes-*" "atril*" "orage" "catfish*" "gnome-calculator" "speech-dispatcher" "hddtemp" "nano" "chromium*" "xfce4" "cups*" "bluez*" "obex-data-server" "libopenobex")
 
 ##loop over all programs
-for i in "${arr_install[@]}"
+for i in "${arrinstall[@]}"
 do
     echo "$i"
     sudo apt-get install "$i" -y
 done
 
-for i in "${arr_uninstall[@]}"
+for i in "${arruninstall[@]}"
 do
     echo "$i"
     sudo apt-get remove --auto-remove "$i" -y
