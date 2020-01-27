@@ -112,6 +112,8 @@ sudo apt-get -f install
 sudo apt-get clean
 sudo apt-get autoclean
 
+sudo update-alternatives --install /usr/bin/x-session-manager x-session-manager /usr/bin/i3 60
+
 timedatectl set-timezone America/Los_Angeles
 
 #install vim and its libraries
