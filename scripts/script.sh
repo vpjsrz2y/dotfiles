@@ -2,7 +2,7 @@ https://github.com/drduh/YubiKey-Guide#master-key
 
 ## GPG
 #generate full key along with public key, https://github.com/drduh/YubiKey-Guide#master-key
-gpg --full-gen-key 
+gpg --full-gen-key
 #export keyid to $KEYID
 export KEYID=0xFF3E7D88647EBCDB
 #create subkeys, https://github.com/drduh/YubiKey-Guide#sub-keys
@@ -30,6 +30,13 @@ gpg --armor --clearsign --default-key 0x9ASDFASDJF7BC299 mail.txt
 #verify signature
 gpg --verify mail.txt.asc
 #encrypt message
-gpg --encrypt --armor -r recipeient@test.com mail.txt.asc 
+gpg --encrypt --armor -r recipeient@test.com mail.txt.asc
 #decrypt message from recipient
 gpg --decrypt mail.txt.asc.asc
+
+
+## connect to wifi using nmcli
+#connect to wifi
+nmcli device wifi rescan
+#connect to different accesspoint
+nmclie device wifi connect HD-Members password hackerdojo
