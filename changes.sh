@@ -112,6 +112,10 @@ sudo apt-get -f install
 sudo apt-get clean
 sudo apt-get autoclean
 
+#disable and stop services
+systemctl stop sendmail apport bluetooth
+sudo systemctl disable sendmail apport bluetooth
+
 sudo update-alternatives --install /usr/bin/x-session-manager x-session-manager /usr/bin/i3 60
 
 timedatectl set-timezone America/Los_Angeles
@@ -132,10 +136,6 @@ git config --global core.editor "vim"
 sudo cp ~/dotfiles/rkhunter.sh /etc/cron.daily/
 sudo cp ~/dotfiles/chkrootkit.conf /etc
 
-#stop services
-sudo service apport stop
-#sudo service bluetooth stop
-sudo /etc/init.d/sendmail stop
 sudo cp ~/dotfiles/00-default.link /etc/systemd/network
 
 #install signal
