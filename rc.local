@@ -1,0 +1,4 @@
+#!/bin/bash
+ip link set wlp2s0 down
+bash /home/chrx/dotfiles/Anti-DDOS/anti-ddos.sh
+exit 0
