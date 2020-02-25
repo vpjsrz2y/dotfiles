@@ -34,9 +34,15 @@ gpg --encrypt --armor -r recipeient@test.com mail.txt.asc
 #decrypt message from recipient
 gpg --decrypt mail.txt.asc.asc
 
-
 ## connect to wifi using nmcli
 #connect to wifi
 nmcli device wifi rescan
+#list wifi
+nmcli device wifi list
 #connect to different accesspoint
 nmclie device wifi connect HD-Members password hackerdojo
+
+## disable wifi adapter
+sudo iwconfig wlan0 txpower off
+## enable wifi adapter
+sudo iwconfig wlan0 txpower on
