@@ -113,7 +113,7 @@ sudo apt-get clean
 sudo apt-get autoclean
 
 #disable and stop services
-systemctl stop sendmail apport bluetooth
+sudo systemctl stop sendmail apport bluetooth
 sudo systemctl disable sendmail apport bluetooth
 
 sudo update-alternatives --install /usr/bin/x-session-manager x-session-manager /usr/bin/i3 60
