@@ -115,6 +115,8 @@ sudo apt-get autoclean
 #disable and stop services
 sudo systemctl stop sendmail apport bluetooth
 sudo systemctl disable sendmail apport bluetooth
+sudo systemctl enable rc-local
+sudo systemctl enable rc-local.service
 
 sudo update-alternatives --install /usr/bin/x-session-manager x-session-manager /usr/bin/i3 60
 
