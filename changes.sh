@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #remove cups
-sudo apt-get remove cups*
+sudo apt-get remove cups* -y
 
 #iptables rules
 sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
@@ -145,6 +145,10 @@ sudo cp ~/dotfiles/rc.local /etc/rc.local
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 sudo apt update && sudo apt install signal-desktop
+
+#install torbrowser
+cd ~/Desktop && wget https://www.torproject.org/dist/torbrowser/9.0.10/tor-browser-linux64-9.0.10_en-US.tar.xz
+tar xf tor-browser-linux64-9.0.10_en-US.tar.xz
 
 #create gpg.conf
 cp ~/dotfiles/gpg.conf ~/.gnupg
