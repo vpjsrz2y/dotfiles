@@ -25,3 +25,7 @@ nmcli device wifi connect "HD-Members" password hackerdojo
 sudo du -sh / | sort -n -r | head -n 100
 git rebase -i HEAD~3
 git push origin master
+sudo ip link set wlp2s0 down
+sudo ip link set wlp2s0 up
+find . -type f -name ".*log.*"
+xrandr --output eDP1 --brightness 0.2
