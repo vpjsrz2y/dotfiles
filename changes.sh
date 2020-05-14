@@ -136,10 +136,10 @@ git config --global user.name "test1"
 git config --global core.editor "vim"
 
 #protections to run rkhuter, chkrootkit
-sudo cp ~/dotfiles/rkhunter.sh /etc/cron.daily/
-sudo cp ~/dotfiles/chkrootkit.conf /etc
-sudo cp ~/dotfiles/00-default.link /etc/systemd/network
-sudo cp ~/dotfiles/rc.local /etc/rc.local
+sudo cp ~/dotfiles/confs/rkhunter.sh /etc/cron.daily/
+sudo cp ~/dotfiles/confs/chkrootkit.conf /etc
+sudo cp ~/dotfiles/confs/00-default.link /etc/systemd/network
+sudo cp ~/dotfiles/confs/rc.local /etc
 
 #install signal
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
@@ -151,7 +151,7 @@ cd ~/Desktop && wget https://www.torproject.org/dist/torbrowser/9.0.10/tor-brows
 tar xf tor-browser-linux64-9.0.10_en-US.tar.xz
 
 #create gpg.conf
-cp ~/dotfiles/gpg.conf ~/.gnupg
+cp ~/dotfiles/confs/gpg.conf ~/.gnupg
 
 #save rules
 sudo netfilter-persistent save
