@@ -152,8 +152,9 @@ sudo apt update && sudo apt install signal-desktop
 cd ~/Desktop && wget https://www.torproject.org/dist/torbrowser/9.0.10/tor-browser-linux64-9.0.10_en-US.tar.xz
 tar xf tor-browser-linux64-9.0.10_en-US.tar.xz
 
-#create gpg.conf
+# configuration files for gpg and bash
 cp ~/dotfiles/confs/gpg.conf ~/.gnupg
+cp ~/dotfiles/confs/.bash_history ~/
 
 #save rules
 sudo netfilter-persistent save
