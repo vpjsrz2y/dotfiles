@@ -135,11 +135,13 @@ git config --global user.email "test1@test1.test1"
 git config --global user.name "test1"
 git config --global core.editor "vim"
 
-#protections to run rkhuter, chkrootkit
+#protections to run rkhuter, chkrootkit, psad, iptables
 sudo cp ~/dotfiles/confs/rkhunter.sh /etc/cron.daily/
 sudo cp ~/dotfiles/confs/chkrootkit.conf /etc
 sudo cp ~/dotfiles/confs/00-default.link /etc/systemd/network
 sudo cp ~/dotfiles/confs/rc.local /etc
+sudo cp ~/dotfiles/confs/iptables.sh /etc/init.d/
+sudo cp ~/dotfiles/confs/psad.conf /etc/psad/
 
 #install signal
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
