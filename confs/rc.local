@@ -1,4 +1,5 @@
 #!/bin/bash
 ip link set wlp2s0 down
 bash /home/chrx/dotfiles/Anti-DDOS/anti-ddos.sh
+systemctcl stop postfix portsentry
 exit 0
