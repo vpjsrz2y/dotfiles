@@ -1,7 +1,7 @@
 vi dotfiles/changes.sh 
 passwd
 sudo apt-get install git
-git clone https://github.com/wAsabi-007/dotfiles.git
+git clone https://github.com/Balzarine/dotfiles.git
 sudo iptables -L
 reboot
 man nmcli
