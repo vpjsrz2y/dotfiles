@@ -34,7 +34,12 @@ iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
 iptables -A INPUT -p icmp --icmp-type 13 -j DROP
 iptables -A INPUT -p icmp --icmp-type 17 -j DROP
 iptables -A INPUT -p icmp --icmp-type 14 -j DROP
-iptables -A INPUT -p icmp -m limit --limit 1/second -j ACCEPT
+# iptables -A INPUT -p icmp -m limit --limit 1/second -j ACCEPT
+iptables -A INPUT -p icmp --icmp-type 0 -j DROP
+# iptables -A INPUT -p icmp -m limit --limit  1/s --limit-burst 1 -j ACCEPT
+# iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 1 -j LOG --log-prefix PING-DROP:
+iptables -A INPUT -p icmp -j DROP
+iptables -A OUTPUT -p icmp -j ACCEPT
 
 # Discard invalid Packets
 iptables -A INPUT -m state --state INVALID -j DROP
@@ -78,40 +83,37 @@ iptables -A FORWARD -p tcp -m tcp --dport 139 -m recent --name portscan --set -j
 # Inbound Rules
 
 # smtp
-# iptables -A INPUT -p tcp -m tcp --dport 25 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 25 -j DROP
 # http
 iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
 # https
 iptables -A INPUT -p tcp -m tcp --dport 443 -j ACCEPT
-
 # ssh & sftp
-# iptables -A INPUT -p tcp -m tcp --dport 372 -j ACCEPT
+iptables -A INPUT -p tcp -m tcp --dport 372 -j DROP
 
-# Allow Ping
-# iptables -A INPUT -p icmp --icmp-type 0 -j ACCEPT
 
 
 # Limit SSH connection from a single IP
 iptables -A INPUT -p tcp --syn --dport 372 -m connlimit --connlimit-above 2 -j REJECT
 
 #iptables rules
-sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG NONE -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,SYN FIN,SYN -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags SYN,RST SYN,RST -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,RST FIN,RST -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,ACK FIN -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ACK,URG URG -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ACK,FIN FIN -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ACK,PSH PSH -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL ALL -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL NONE -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL FIN,PSH,URG -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL SYN,FIN,PSH,URG -j DROP
-sudo iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL SYN,RST,ACK,FIN,URG -j DROP
+iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,SYN,RST,PSH,ACK,URG NONE -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,SYN FIN,SYN -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags SYN,RST SYN,RST -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,RST FIN,RST -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags FIN,ACK FIN -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags ACK,URG URG -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags ACK,FIN FIN -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags ACK,PSH PSH -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL ALL -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL NONE -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL FIN,PSH,URG -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL SYN,FIN,PSH,URG -j DROP
+iptables -t mangle -A PREROUTING -p tcp --tcp-flags ALL SYN,RST,ACK,FIN,URG -j DROP
 
 #block outgoing SMTP mail
-sudo iptables -A OUTPUT -p tcp --dport 25 -j REJECT
+iptables -A OUTPUT -p tcp --dport 25 -j REJECT
 
 #block outgoing connections to facebook
 whois -h v4.whois.cymru.com " -v $(host facebook.com | grep "has address" | cut -d " " -f4)" | tail -n1 | awk '{print $1}'
@@ -120,28 +122,24 @@ for i in $(whois -h whois.radb.net -- '-i origin AS32934' | grep "^route:" | cut
 done
 
 #protect against port scanning
-sudo iptables -N port-scanning
-sudo iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 1/s --limit-burst 2 -j RETURN
-sudo iptables -A port-scanning -j DROP
+iptables -N port-scanning
+iptables -A port-scanning -p tcp --tcp-flags SYN,ACK,FIN,RST RST -m limit --limit 1/s --limit-burst 2 -j RETURN
+iptables -A port-scanning -j DROP
 
 #ssh bruteforce protection
-sudo iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --set
-sudo iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
+iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --set
+iptables -A INPUT -p tcp --dport ssh -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 10 -j DROP
 
 #synflood protection
-sudo iptables -N syn_flood
-sudo iptables -A INPUT -p tcp --syn -j syn_flood
-sudo iptables -A syn_flood -m limit --limit 1/s --limit-burst 3 -j RETURN
-sudo iptables -A syn_flood -j DROP
-sudo iptables -A INPUT -p icmp -m limit --limit  1/s --limit-burst 1 -j ACCEPT
-sudo iptables -A INPUT -p icmp -m limit --limit 1/s --limit-burst 1 -j LOG --log-prefix PING-DROP:
-sudo iptables -A INPUT -p icmp -j DROP
-sudo iptables -A OUTPUT -p icmp -j ACCEPT
+iptables -N syn_flood
+iptables -A INPUT -p tcp --syn -j syn_flood
+iptables -A syn_flood -m limit --limit 1/s --limit-burst 3 -j RETURN
+iptables -A syn_flood -j DROP
 
 #mitigating SYN floods with synproxy
-sudo iptables -t raw -A PREROUTING -p tcp -m tcp --syn -j CT --notrack
-sudo iptables -A INPUT -p tcp -m tcp -m conntrack --ctstate INVALID,UNTRACKED -j SYNPROXY --sack-perm --timestamp --wscale 7 --mss 1460
-sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
+iptables -t raw -A PREROUTING -p tcp -m tcp --syn -j CT --notrack
+iptables -A INPUT -p tcp -m tcp -m conntrack --ctstate INVALID,UNTRACKED -j SYNPROXY --sack-perm --timestamp --wscale 7 --mss 1460
+iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
 
 ##Block packets from private subnets
 #_subnets=("224.0.0.0/3" "169.254.0.0/16" "172.16.0.0/12" "192.0.2.0/24" "192.168.0.0/16" "10.0.0.0/8" "0.0.0.0/8" "240.0.0.0/5")
@@ -152,13 +150,13 @@ sudo iptables -A INPUT -m conntrack --ctstate INVALID -j DROP
 #sudo iptables -t mangle -A PREROUTING -s 127.0.0.0/8 ! -i lo -j DROP
 #
 #block uncommon MSS value
-sudo iptables -t mangle -A PREROUTING -p tcp -m conntrack --ctstate NEW -m tcpmss ! --mss 536:65535 -j DROP
+iptables -t mangle -A PREROUTING -p tcp -m conntrack --ctstate NEW -m tcpmss ! --mss 536:65535 -j DROP
 
 #drop all null packets
-sudo iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
+iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP
 
 #drop xmas packets
-sudo iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
+iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
 
 #Block New Packets That Are Not SYN
-sudo iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
+iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
