@@ -1,4 +1,4 @@
-ip="192.168.252.1"
+ip="-e wlp2s0 192.168.1.2"
 
 ## Nmap Port Selection
 # Scan a single Port
