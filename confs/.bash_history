@@ -1,7 +1,7 @@
 vi dotfiles/changes.sh 
 passwd
 sudo apt-get install git
-git clone https://github.com/Balzarine/dotfiles.git
+git clone -b new https://github.com/Balzarine/dotfiles.git
 sudo iptables -L
 reboot
 man nmcli
@@ -29,3 +29,5 @@ sudo ip link set wlp2s0 down
 sudo ip link set wlp2s0 up
 find . -type f -name ".*log.*"
 xrandr --output eDP1 --brightness 0.2
+sudo systemctl start iptables.service 
+sudo psad -S | less
