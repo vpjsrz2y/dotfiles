@@ -89,7 +89,7 @@ sudo protonvpn c -r
 #update system
 sudo apt-get update -y
 ##declare variable
-declare -a arrinstall=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "netfilter-persistent" "whois" "gedit" "psad" "portsentry" "tiger" "unhide")
+declare -a arrinstall=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "netfilter-persistent" "whois" "gedit" "psad" "portsentry" "tiger" "unhide" "clamav" "python3-venv")
 declare -a arruninstall=("xfce4*" "xfconf" "xfce4-utils" "xfwm4" "xfce4-session" "xfdesktop4" "exo-utils" "xfce4-panel" "xfce4-terminal"  "thunar" "compton" "gnome-screenshot" "gnome-screensaver" "vim-tiny" "scrot" "mousepad" "onboard" "gnome-themes-*" "atril*" "orage" "catfish*" "gnome-calculator" "speech-dispatcher" "hddtemp" "nano" "chromium*" "xfce4" "cups*" "bluez*" "obex-data-server" "libopenobex")
 
 ##loop over all programs
@@ -155,6 +155,15 @@ tar xf tor-browser-linux64-9.0.10_en-US.tar.xz
 # configuration files for gpg and bash
 cp ~/dotfiles/confs/gpg.conf ~/.gnupg
 cp ~/dotfiles/confs/.bash_history ~/
+
+# configure clamav
+# mkdir -m 0770 -p /var/lib/fangfrisch
+# chgrp clamav /var/lib/fangfrisch
+# cd /var/lib/fangfrisch
+# python3 -m venv venv
+# source venv/bin/activate
+# pip install fangfrisch
+# sudo -u clamav -- fangfrisch --conf /etc/fangfrisch.conf initdb
 
 #save rules
 sudo netfilter-persistent save
