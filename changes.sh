@@ -139,6 +139,10 @@ sudo cp ~/dotfiles/confs/00-default.link /etc/systemd/network
 sudo cp ~/dotfiles/confs/rc.local /etc
 sudo cp ~/dotfiles/confs/iptables.sh /etc/init.d/
 sudo cp ~/dotfiles/confs/psad.conf /etc/psad/
+sudo cp ~/dotfiles/confs/iptables.service /etc/systemd/system/
+
+# enable iptables
+sudo systemctl enable iptables.service
 
 #install signal
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
