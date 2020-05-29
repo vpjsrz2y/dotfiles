@@ -72,9 +72,6 @@ sudo iptables -A INPUT -p tcp --tcp-flags ALL ALL -j DROP
 #Block New Packets That Are Not SYN
 sudo iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
 
-#save rules
-sudo netfilter-persistent save
-
 #install passphraseme
 sudo apt-get install -y openvpn dialog python3-pip python3-setuptools
 sudo pip3 install passphraseme
@@ -89,7 +86,7 @@ sudo protonvpn c -r
 #update system
 sudo apt-get update -y
 ##declare variable
-declare -a arrinstall=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "netfilter-persistent" "whois" "gedit" "psad" "portsentry" "tiger" "unhide" "clamav" "python3-venv")
+declare -a arrinstall=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "whois" "gedit" "psad" "portsentry" "tiger" "unhide" "clamav" "python3-venv")
 declare -a arruninstall=("xfce4*" "xfconf" "xfce4-utils" "xfwm4" "xfce4-session" "xfdesktop4" "exo-utils" "xfce4-panel" "xfce4-terminal"  "thunar" "compton" "gnome-screenshot" "gnome-screensaver" "vim-tiny" "scrot" "mousepad" "onboard" "gnome-themes-*" "atril*" "orage" "catfish*" "gnome-calculator" "speech-dispatcher" "hddtemp" "nano" "chromium*" "xfce4" "cups*" "bluez*" "obex-data-server" "libopenobex")
 
 ##loop over all programs
@@ -165,9 +162,6 @@ cp ~/dotfiles/confs/.bash_history ~/
 # pip install fangfrisch
 # sudo -u clamav -- fangfrisch --conf /etc/fangfrisch.conf initdb
 
-#save rules
-sudo netfilter-persistent save
-
 #clone scripts
 cd ~/dotfiles && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
 cd ~/dotfiles && git clone https://github.com/Jsitech/JShielder.git
@@ -176,9 +170,7 @@ cd ~/dotfiles && git clone https://github.com/CISOfy/lynis
 
 #linux hardening script
 cd ~/dotfiles/Anti-DDOS && sudo bash ./anti-ddos.sh
-sudo netfilter-persistent save
 cd ~/dotfiles/JShielder && sudo ./jshielder.sh
-sudo netfilter-persistent save
 cd ~/dotfiles/hardening && cd tests && sudo bats .
 cd ~/dotfiles/lynis/
 sudo chown -R 0:0 ~/dotfiles/lynis
