@@ -167,15 +167,15 @@ cp ~/dotfiles/confs/.bash_history ~/
 # sudo -u clamav -- fangfrisch --conf /etc/fangfrisch.conf initdb
 
 #clone scripts
-cd ~/dotfiles && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
-cd ~/dotfiles && git clone https://github.com/Jsitech/JShielder.git
-cd ~/dotfiles && git clone https://github.com/konstruktoid/hardening.git
-cd ~/dotfiles && git clone https://github.com/CISOfy/lynis
+cd /tmp && git clone https://github.com/ismailtasdelen/Anti-DDOS.git
+cd /tmp && git clone https://github.com/Jsitech/JShielder.git
+cd /tmp && git clone https://github.com/konstruktoid/hardening.git
+cd /tmp && git clone https://github.com/CISOfy/lynis
 
 #linux hardening script
-cd ~/dotfiles/Anti-DDOS && sudo bash ./anti-ddos.sh
-cd ~/dotfiles/JShielder && sudo ./jshielder.sh
-cd ~/dotfiles/hardening && cd tests && sudo bats .
-cd ~/dotfiles/lynis/
-sudo chown -R 0:0 ~/dotfiles/lynis
-./lynis audit system > ~dotfiles/lynis/audit.txt
+cd /tmp/Anti-DDOS && sudo bash ./anti-ddos.sh
+cd /tmp/JShielder && sudo ./jshielder.sh
+cd /tmp/hardening && cd tests && sudo bats .
+cd /tmp/lynis/
+sudo chown -R 0:0 /tmp/lynis
+./lynis audit system > tmp/lynis/audit.txt
