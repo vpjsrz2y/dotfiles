@@ -45,7 +45,8 @@ sudo psad -S | less
 sudo reboot
 sudo rfkill block bluetooth
 sudo systemctl disable sendmail
-sudo systemctl start iptables.service 
+sudo systemctl restart iptables.service 
+sudo systemctl restart psad.service 
 sudo wireshark
 sudo zgrep -rnw . -e 'iptables' > ~/ztest.txt
 systemctl --type=service --state=active
@@ -54,3 +55,5 @@ systemctl list-unit-files
 tmux
 vi dotfiles/changes.sh 
 xrandr --output eDP1 --brightness 0.2
+sudo cp ~/dotfiles/confs/resolv.conf /etc/
+cd ~/Desktop/tor-browser_en-US/ && ./start-tor-browser.desktop
