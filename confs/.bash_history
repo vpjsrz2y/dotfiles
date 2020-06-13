@@ -20,6 +20,8 @@ ls -alhS
 man nmcli
 netstat -tulpn | grep "LISTEN"
 nmcli device wifi connect "HD-Members" password hackerdojo
+nmcli device wifi connect "SAFEWAY_FREE_WIFI"
+nmcli device wifi connect "xfinitywifi"
 nmcli device wifi list
 nmcli device wifi rescan
 pactl -- set-sink-volume 0 +100%
@@ -46,6 +48,9 @@ sudo reboot
 sudo rfkill block bluetooth
 sudo systemctl disable sendmail
 sudo systemctl restart iptables.service 
+sudo systemctl restart iptables.service && sudo systemctl restart psad.service && sudo systemctl restart procps.service
+sudo ip link set wlp2s0 up && sudo systemctl restart NetworkManager.service
+sudo systemctl restart NetworkManager.service 
 sudo systemctl restart psad.service 
 sudo wireshark
 sudo zgrep -rnw . -e 'iptables' > ~/ztest.txt
@@ -57,3 +62,6 @@ vi dotfiles/changes.sh
 xrandr --output eDP1 --brightness 0.2
 sudo cp ~/dotfiles/confs/resolv.conf /etc/
 cd ~/Desktop/tor-browser_en-US/ && ./start-tor-browser.desktop
+cd ~/Desktop && git clone https://github.com/1tayH/noisy.git
+cd ~/Desktop/noisy && python3 noisy.py --config config.json
+openssl rand -base64 10
