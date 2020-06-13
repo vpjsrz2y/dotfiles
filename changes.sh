@@ -140,6 +140,8 @@ sudo cp ~/dotfiles/confs/rc.local /etc
 sudo cp ~/dotfiles/confs/iptables.sh /etc/init.d/
 sudo cp ~/dotfiles/confs/psad.conf /etc/psad/
 sudo cp ~/dotfiles/confs/iptables.service /etc/systemd/system/
+sudo cp ~/dotfiles/confs/hosts /etc/
+sudo cp ~/dotfiles/confs/hostname /etc
 
 # enable iptables
 sudo systemctl enable iptables.service
