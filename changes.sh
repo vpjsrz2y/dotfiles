@@ -112,8 +112,6 @@ sudo apt-get autoclean
 #disable and stop services
 sudo systemctl stop sendmail apport bluetooth
 sudo systemctl disable sendmail apport bluetooth
-sudo systemctl enable rc-local
-sudo systemctl enable rc-local.service
 
 sudo update-alternatives --install /usr/bin/x-session-manager x-session-manager /usr/bin/i3 60
 
@@ -142,9 +140,12 @@ sudo cp ~/dotfiles/confs/psad.conf /etc/psad/
 sudo cp ~/dotfiles/confs/iptables.service /etc/systemd/system/
 sudo cp ~/dotfiles/confs/hosts /etc/
 sudo cp ~/dotfiles/confs/hostname /etc
+sudo cp ~/dotfiles/confs/resolv.conf /usr/bin
+sudo cp ~/dotfiles/confs/bootup.* /etc/systemd/system
 
-# enable iptables
+# enable services
 sudo systemctl enable iptables.service
+sudo systemctl enable bootup.service
 
 #install signal
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -

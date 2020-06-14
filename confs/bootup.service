@@ -1,0 +1,9 @@
+[Unit]
+Description=Run this at boot
+
+[Service]
+Restart=no
+ExecStart=/bin/bash /etc/rc.local
+
+[Install]
+WantedBy=timers.target
