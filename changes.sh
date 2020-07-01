@@ -160,6 +160,9 @@ tar xf tor-browser-linux64-9.5_en-US.tar.xz
 cp ~/dotfiles/confs/gpg.conf ~/.gnupg
 cp ~/dotfiles/confs/.bash_history ~/
 
+# remove linux modules
+sudo rmmod btusb btrtl btbcm btintel bluetooth ecdh_generic
+
 # configure clamav
 # mkdir -m 0770 -p /var/lib/fangfrisch
 # chgrp clamav /var/lib/fangfrisch
