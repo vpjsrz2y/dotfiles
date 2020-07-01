@@ -86,7 +86,7 @@ sudo protonvpn c -r
 #update system
 sudo apt-get update -y
 ##declare variable
-declare -a arrinstall=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "whois" "gedit" "psad" "portsentry" "tiger" "unhide" "clamav" "python3-venv" "hping3" "wireshark" "nmap")
+declare -a arrinstall=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "whois" "gedit" "psad" "tiger" "unhide" "clamav" "python3-venv" "hping3" "wireshark" "nmap")
 declare -a arruninstall=("xfce4*" "xfconf" "xfce4-utils" "xfwm4" "xfce4-session" "xfdesktop4" "exo-utils" "xfce4-panel" "xfce4-terminal"  "thunar" "compton" "gnome-screenshot" "gnome-screensaver" "vim-tiny" "scrot" "mousepad" "onboard" "gnome-themes-*" "atril*" "orage" "catfish*" "gnome-calculator" "speech-dispatcher" "hddtemp" "nano" "chromium*" "xfce4" "cups*" "bluez*" "obex-data-server" "libopenobex")
 
 ##loop over all programs
