@@ -163,6 +163,7 @@ cp ~/dotfiles/confs/.bash_history ~/
 # remove linux modules
 sudo rmmod btusb btrtl btbcm btintel bluetooth ecdh_generic
 sudo rmmod joydev
+sudo rmmod ip6table_filter ip6_tables
 
 # configure clamav
 # mkdir -m 0770 -p /var/lib/fangfrisch
