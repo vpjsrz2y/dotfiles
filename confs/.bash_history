@@ -26,6 +26,7 @@ git rebase -i HEAD~3
 git rebase -i HEAD~5
 hexNum=02900000
 ls -alhS
+lsmod | less
 man nmcli
 netstat -tulpn | grep "LISTEN"
 nmcli device wifi connect "HD-Members" password hackerdojo
@@ -41,6 +42,7 @@ pactl -- set-sink-volume 0 +100%
 passwd
 ping google.com
 reboot
+rmmod bluetooth
 service --status-all | less
 sudo apt-get install git
 sudo bash dotfiles/Anti-DDOS/anti-ddos.sh 
