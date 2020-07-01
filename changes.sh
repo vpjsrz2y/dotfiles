@@ -164,6 +164,7 @@ cp ~/dotfiles/confs/.bash_history ~/
 sudo rmmod btusb btrtl btbcm btintel bluetooth ecdh_generic
 sudo rmmod joydev
 sudo rmmod ip6table_filter ip6_tables
+sudo rmmod uvcvideo
 
 # configure clamav
 # mkdir -m 0770 -p /var/lib/fangfrisch
