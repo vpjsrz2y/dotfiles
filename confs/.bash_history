@@ -53,7 +53,7 @@ sudo grep -rnw . -e 'iptables'
 sudo hexdump -C /dev/loop0 | grep LUKS
 sudo ip link set wlp2s0 down
 sudo ip link set wlp2s0 up
-sudo ip link set wlp2s0 up && sudo systemctl restart NetworkManager.service && sudo cp ~/dotfiles/confs/resolv.conf /etc/
+cd ~/dotfiles/scripts/ && sudo python3 macchang.py && sudo ip link set wlp2s0 up && sudo systemctl restart NetworkManager.service && sudo cp ~/dotfiles/confs/resolv.conf /etc/
 sudo iptables -L
 sudo iw dev wlp2s0 interface add wlan0_sta type managed addr 00:11:24:DE:F5:F8
 sudo iwconfig wlp2s0 txpower off
@@ -78,4 +78,5 @@ systemctl is-enabled iptables.service
 systemctl list-unit-files 
 tmux
 vi dotfiles/changes.sh 
+nmcli device wifi list | grep "xfinitywifi"
 xrandr --output eDP1 --brightness 0.2
