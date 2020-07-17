@@ -143,6 +143,7 @@ sudo cp ~/dotfiles/confs/hostname /etc
 sudo cp ~/dotfiles/confs/resolv.conf /usr/bin
 sudo cp ~/dotfiles/confs/bootup.* /etc/systemd/system
 sudo cp ~/dotfiles/confs/logrotate.conf /etc/
+sudo cp ~/dotfiles/confs/grub /etc/default/grub
 
 # enable services
 sudo systemctl enable iptables.service
@@ -151,6 +152,9 @@ sudo systemctl enable bootup.service
 # disable services
 sudo /etc/init.d/postfix stop
 sudo systemctl disable postfix.service
+
+# update grub
+sudo update-grub
 
 #install signal
 curl -s https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
