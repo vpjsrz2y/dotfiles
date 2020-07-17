@@ -144,6 +144,7 @@ sudo cp ~/dotfiles/confs/resolv.conf /usr/bin
 sudo cp ~/dotfiles/confs/bootup.* /etc/systemd/system
 sudo cp ~/dotfiles/confs/logrotate.conf /etc/
 sudo cp ~/dotfiles/confs/grub /etc/default/grub
+sudo cp /etc/cron.daily/logrotate /etc/cron.hourly/
 
 # enable services
 sudo systemctl enable iptables.service
