@@ -171,6 +171,17 @@ tar xf tor-browser-linux64-9.5_en-US.tar.xz
 cp ~/dotfiles/confs/gpg.conf ~/.gnupg
 cp ~/dotfiles/confs/.bash_history ~/
 
+# settings for gnome terminal
+gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
+
+# set terminal colors
+mkdir -p "$HOME/src"
+cd "$HOME/src"
+git clone https://github.com/Mayccoll/Gogh.git gogh
+cd gogh/themes
+export TERMINAL=gnome-terminal
+./gruvbox-dark.sh
+
 # remove linux modules
 sudo rmmod btusb btrtl btbcm btintel bluetooth ecdh_generic
 sudo rmmod joydev
