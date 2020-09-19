@@ -89,7 +89,7 @@ sudo apt-get update -y
 declare -a arrinstall=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "whois" "gedit" "psad" "tiger" "unhide" "clamav" "python3-venv" "hping3" "wireshark" "nmap")
 declare -a arruninstall=("xfce4*" "xfconf" "xfce4-utils" "xfwm4" "xfce4-session" "xfdesktop4" "exo-utils" "xfce4-panel" "xfce4-terminal"  "thunar" "compton" "gnome-screenshot" "gnome-screensaver" "vim-tiny" "scrot" "mousepad" "onboard" "gnome-themes-*" "atril*" "orage" "catfish*" "gnome-calculator" "speech-dispatcher" "hddtemp" "nano" "chromium*" "xfce4" "cups*" "bluez*" "obex-data-server" "libopenobex")
 
-##loop over all programs
+#loop over all programs
 for i in "${arrinstall[@]}"
 do
     echo "$i"
@@ -144,7 +144,7 @@ sudo cp ~/dotfiles/confs/resolv.conf /usr/bin
 sudo cp ~/dotfiles/confs/bootup.* /etc/systemd/system
 sudo cp ~/dotfiles/confs/logrotate.conf /etc/
 sudo cp ~/dotfiles/confs/grub /etc/default/grub
-sudo cp /etc/cron.daily/logrotate /etc/cron.hourly/
+sudo cp ~/dotfiles/confs/logrotate /etc/cron.hourly/
 
 # enable services
 sudo systemctl enable iptables.service
