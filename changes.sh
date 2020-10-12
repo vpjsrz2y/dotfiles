@@ -86,8 +86,9 @@ sudo protonvpn c -r
 #update system
 sudo apt-get update -y
 ##declare variable
-declare -a arrinstall=("vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "whois" "gedit" "psad" "tiger" "unhide" "clamav" "python3-venv" "hping3" "wireshark" "nmap")
-declare -a arruninstall=("xfce4*" "xfconf" "xfce4-utils" "xfwm4" "xfce4-session" "xfdesktop4" "exo-utils" "xfce4-panel" "xfce4-terminal"  "thunar" "compton" "gnome-screenshot" "gnome-screensaver" "vim-tiny" "scrot" "mousepad" "onboard" "gnome-themes-*" "atril*" "orage" "catfish*" "gnome-calculator" "speech-dispatcher" "hddtemp" "nano" "chromium*" "xfce4" "cups*" "bluez*" "obex-data-server" "libopenobex" "ufw")
+declare -a arrinstall=("terminator" "vim" "i3" "xss-lock" "lightdm" "firefox" "tmux" "git" "whois" "gedit" "psad" "tiger" "unhide" "clamav" "python3-venv" "hping3" "wireshark" "nmap")
+
+declare -a arruninstall=("packagekit" "whoopsie" "gdm3" "gnome*" "xfce4*" "xfconf" "xfce4-utils" "xfwm4" "xfce4-session" "xfdesktop4" "exo-utils" "xfce4-panel" "xfce4-terminal"  "thunar" "compton" "gnome-screenshot" "gnome-screensaver" "vim-tiny" "scrot" "mousepad" "onboard" "gnome-themes-*" "atril*" "orage" "catfish*" "gnome-calculator" "speech-dispatcher" "hddtemp" "nano" "chromium*" "xfce4" "cups*" "bluez*" "obex-data-server" "libopenobex" "ufw")
 
 #loop over all programs
 for i in "${arrinstall[@]}"
@@ -114,6 +115,7 @@ sudo systemctl stop sendmail apport bluetooth
 sudo systemctl disable sendmail apport bluetooth
 
 sudo update-alternatives --install /usr/bin/x-session-manager x-session-manager /usr/bin/i3 60
+sudo update-alternatives --config x-terminal-emulator
 
 timedatectl set-timezone America/Los_Angeles
 
