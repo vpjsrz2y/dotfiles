@@ -148,6 +148,7 @@ sudo cp ~/dotfiles/confs/logrotate.conf /etc/
 sudo cp ~/dotfiles/confs/grub /etc/default/grub
 sudo cp ~/dotfiles/confs/logrotate /etc/cron.hourly/
 sudo cp ~/dotfiles/confs/NetworkManager-inter.conf /var/lib/NetworkManager/NetworkManager-inter.conf
+sudo cp ~/dotfiles/confs/.bashrc ~/
 
 # enable services
 sudo systemctl enable iptables.service
