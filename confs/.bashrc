@@ -17,7 +17,7 @@ shopt -s histappend
 
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 HISTSIZE=100000
-HISTFILESIZE=2000
+HISTFILESIZE=200000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -118,3 +118,12 @@ fi
 
 # After each command, save and reload history
 PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+
+# use vim editing mode
+set -o vi
+
+bind -x '"\C-l": clear'
+
+export PATH="/home/expiration/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
