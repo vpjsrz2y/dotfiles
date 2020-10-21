@@ -186,10 +186,14 @@ export TERMINAL=gnome-terminal
 ./gruvbox-dark.sh
 
 # remove linux modules
-sudo rmmod btusb btrtl btbcm btintel bluetooth ecdh_generic
-sudo rmmod joydev
-sudo rmmod ip6table_filter ip6_tables
-sudo rmmod uvcvideo
+declare -a mod_remove=("xfs" "btusb" "btrtl" "btbcm" "btintel" "bluetooth" "ecdh_generic" "joydev" "ip6table_filter" "ip6_tables" "uvcvideo")
+
+#loop over all programs
+for i in "${mod_remove[@]}"
+do
+    echo "$i"
+    sudo sudo rmmod "$i"
+done
 
 # configure clamav
 # mkdir -m 0770 -p /var/lib/fangfrisch
