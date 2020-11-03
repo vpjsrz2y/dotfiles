@@ -166,8 +166,8 @@ echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sud
 sudo apt update && sudo apt install signal-desktop
 
 #install torbrowser
-cd ~/Desktop && wget https://www.torproject.org/dist/torbrowser/9.5/tor-browser-linux64-9.5_en-US.tar.xz
-tar xf tor-browser-linux64-9.5_en-US.tar.xz
+cd ~/Desktop && aria2c -x 10 https://www.torproject.org/dist/torbrowser/10.0.2/tor-browser-linux64-10.0.2_en-US.tar.xz
+tar xf tor-browser-linux64-10.0.2_en-US.tar.xz
 
 # configuration files for gpg and bash
 cp ~/dotfiles/confs/gpg.conf ~/.gnupg
