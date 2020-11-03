@@ -147,7 +147,6 @@ sudo cp ~/dotfiles/confs/bootup.* /etc/systemd/system
 sudo cp ~/dotfiles/confs/logrotate.conf /etc/
 sudo cp ~/dotfiles/confs/grub /etc/default/grub
 sudo cp ~/dotfiles/confs/logrotate /etc/cron.hourly/
-sudo cp ~/dotfiles/confs/.bashrc ~/
 sudo cp ~/dotfiles/confs/NetworkManager-intern.conf /var/lib/NetworkManager/NetworkManager-intern.conf
 
 # enable services
@@ -173,6 +172,8 @@ tar xf tor-browser-linux64-9.5_en-US.tar.xz
 # configuration files for gpg and bash
 cp ~/dotfiles/confs/gpg.conf ~/.gnupg
 cp ~/dotfiles/confs/.bash_history ~/
+cp ~/dotfiles/confs/.tmux.conf ~/
+cp ~/dotfiles/confs/.bashrc ~/
 
 # settings for gnome terminal
 gsettings set org.gnome.Terminal.Legacy.Settings headerbar false
