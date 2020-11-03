@@ -111,8 +111,8 @@ sudo apt-get clean
 sudo apt-get autoclean
 
 #disable and stop services
-sudo systemctl stop sendmail apport bluetooth
-sudo systemctl disable sendmail apport bluetooth
+sudo systemctl stop sendmail apport.service bluetooth.service apport-autoreport.service apport-forward.service
+sudo systemctl disable sendmail apport.service bluetooth.service apport-autoreport.service apport-forward.service
 
 sudo update-alternatives --install /usr/bin/x-session-manager x-session-manager /usr/bin/i3 60
 sudo update-alternatives --config x-terminal-emulator
