@@ -206,6 +206,17 @@ do
     sudo sudo rmmod "$i"
 done
 
+# remove snapd and all snaps
+declare -a mod_remove=("gnome-3-34-1804" "snap-store" "gtk-common-themes" "core18" "snapd")
+
+#loop over all programs
+for i in "${mod_remove[@]}"
+do
+    echo "$i"
+    sudo snap remove --purge "$i"
+done
+
+
 # configure clamav
 # mkdir -m 0770 -p /var/lib/fangfrisch
 # chgrp clamav /var/lib/fangfrisch
