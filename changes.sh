@@ -197,13 +197,13 @@ export TERMINAL=gnome-terminal
 ./gruvbox-dark.sh
 
 # remove linux modules
-declare -a mod_remove=("xfs" "btusb" "btrtl" "btbcm" "btintel" "bluetooth" "ecdh_generic" "joydev" "ip6table_filter" "ip6_tables" "uvcvideo")
+declare -a mod_remove=("xfs" "btusb" "btrfs" "btrtl" "btintel" "btbcm" "bluetooth" "bpfilter" "ecdh_generic" "joydev" "ip6table_filter" "ip6_tables" "uvcvideo")
 
 #loop over all programs
 for i in "${mod_remove[@]}"
 do
     echo "$i"
-    sudo sudo rmmod "$i"
+    sudo rmmod "$i"
 done
 
 # remove snapd and all snaps
