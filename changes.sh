@@ -110,9 +110,25 @@ sudo apt-get -f install
 sudo apt-get clean
 sudo apt-get autoclean
 
-#disable and stop services
-sudo systemctl stop sendmail apport.service bluetooth.service apport-autoreport.service apport-forward.service
-sudo systemctl disable sendmail apport.service bluetooth.service apport-autoreport.service apport-forward.service
+# remove linux services
+declare -a serv_rem=("sendmail.service" "apport.service" "bluetooth.service" "apport-autoreport.service" "apport-forward.service" "postfix.service" "kerneloops.service")
+
+for i in "${serv_rem[@]}"
+do
+    echo "$i"
+    sleep 15s
+    sudo sudo systemctl disable "$i"
+    sleep 15s
+    sudo sudo systemctl stop "$i"
+    sleep 15s
+done
+
+# enable services
+sudo systemctl enable iptables.service
+sudo systemctl enable bootup.service
+
+# disable services
+sudo /etc/init.d/postfix stop
 
 sudo update-alternatives --install /usr/bin/x-session-manager x-session-manager /usr/bin/i3 60
 sudo update-alternatives --config x-terminal-emulator
@@ -148,14 +164,6 @@ sudo cp ~/dotfiles/confs/logrotate.conf /etc/
 sudo cp ~/dotfiles/confs/grub /etc/default/grub
 sudo cp ~/dotfiles/confs/logrotate /etc/cron.hourly/
 sudo cp ~/dotfiles/confs/NetworkManager-intern.conf /var/lib/NetworkManager/NetworkManager-intern.conf
-
-# enable services
-sudo systemctl enable iptables.service
-sudo systemctl enable bootup.service
-
-# disable services
-sudo /etc/init.d/postfix stop
-sudo systemctl disable postfix.service
 
 # update grub
 sudo update-grub
