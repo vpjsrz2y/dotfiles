@@ -173,9 +173,11 @@ wget https://updates.signal.org/desktop/apt/keys.asc | sudo apt-key add -
 echo "deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main" | sudo tee -a /etc/apt/sources.list.d/signal-xenial.list
 sudo apt update && sudo apt install signal-desktop
 
-#install torbrowser
-cd ~/Desktop && aria2c -x 10 https://www.torproject.org/dist/torbrowser/10.0.2/tor-browser-linux64-10.0.2_en-US.tar.xz
+#install noisy and torbrowser
+cd ~/Desktop
+aria2c -x 10 https://www.torproject.org/dist/torbrowser/10.0.2/tor-browser-linux64-10.0.2_en-US.tar.xz
 tar xf tor-browser-linux64-10.0.2_en-US.tar.xz
+git clone https://github.com/1tayH/noisy.git
 
 # configuration files for gpg and bash
 cp ~/dotfiles/confs/gpg.conf ~/.gnupg
