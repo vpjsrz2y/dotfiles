@@ -1,7 +1,9 @@
 ./start-tor-browser.desktop 
+TZ=UTC gpg --no-options --keyid-format long --verify tails-amd64-4.18.img.sig tails-amd64-4.18.img 
 airdump-ng wlan0mon
 airmon-ng check kill
 airmon-ng start wlan0
+aria2c -x 16 https://cdimage.kali.org/kali-2020.3/kali-linux-2020.3-live-amd64.iso
 bash ddos.sh 
 cat /etc/resolv.conf 
 cat /proc/sys/kernel/random/entropy_avail 
@@ -13,6 +15,7 @@ cd ~/dotfiles/scripts/ && sudo python3 macchang.py &&  sudo ip link set wlp2s0 u
 cd ~/dotfiles/scripts/ && sudo python3 macchang.py && sudo ip link set wlp2s0 up && sudo systemctl restart NetworkManager.service && sudo cp ~/dotfiles/confs/resolv.conf /etc/
 cp \*.JoelUser/user.js k215v2x0.Default\ User/
 display -resize 50% -monochrome thing.jpg
+du -a / | sort -n -r | head -n 10
 echo "obase=10; ibase=16; $hexNum" | bc
 exiftool -all= thing.jpg 
 find . -type f -name ".*log.*"
@@ -64,7 +67,9 @@ sudo bash dotfiles/Anti-DDOS/anti-ddos.sh
 sudo cp ip_forward /proc/sys/net/ipv4/ip_forward
 sudo cp ~/dotfiles/confs/resolv.conf /etc/
 sudo cp ~/dotfiles/confs/resolv.conf /etc/ && sudo protonvpn c -r && sudo cp ~/dotfiles/confs/resolv.conf /etc/
+sudo dd if=kali-linux-2020.3-live-amd64.iso of=/dev/sda bs=1M status=progress && sync
 sudo du -sh / | sort -n -r | head -n 100
+sudo find / -printf '%s %p\n' | sort -nr | head -10
 sudo grep -rnw . -e 'iptables'
 sudo hexdump -C /dev/loop0 | grep LUKS
 sudo ip addr add 192.168.2.25/24 dev enx3c8cf8ea198a
