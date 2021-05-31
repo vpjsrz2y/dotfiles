@@ -201,7 +201,7 @@ export TERMINAL=gnome-terminal
 ./gruvbox-dark.sh
 
 # remove linux modules
-declare -a mod_remove=("xfs" "btusb" "btrfs" "btrtl" "btintel" "btbcm" "bluetooth" "bpfilter" "ecdh_generic" "joydev" "ip6table_filter" "ip6_tables" "uvcvideo")
+declare -a mod_remove=("xfs" "ecdh_generic" "joydev" "ip6table_filter" "ip6_tables" "uvcvideo" "nfsd" "bpfilter" "btintel" "btusb" "btrfs" "btrtl" "btintel" "btbcm" "bluetooth")
 
 #loop over all programs
 for i in "${mod_remove[@]}"
