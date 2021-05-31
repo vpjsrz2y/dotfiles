@@ -216,3 +216,11 @@ iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP
 
 #Block connection to BSSID
 iptables -A INPUT -m mac --mac-source 66:23:AE:2D:F6:83 -j DROP
+
+#whitelist ips
+iptables -A INPUT -s 89.39.107.190 -j ACCEPT
+
+#blacklist ips
+iptables -A INPUT -s 192.168.1.98 -j DROP
+iptables -A INPUT -s 192.168.1.227 -j DROP
+iptables -A INPUT -s 192.168.1.142 -j DROP
