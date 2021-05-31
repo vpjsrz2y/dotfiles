@@ -95,14 +95,18 @@ for i in "${arrinstall[@]}"
 do
     echo "$i"
     sudo apt-get install "$i" -y
+    sleep 15s
 done
 
 for i in "${arruninstall[@]}"
 do
     echo "$i"
     sudo apt-get remove --auto-remove "$i" -y
+    sleep 15s
     sudo apt-get purge --auto-remove "$i" -y
+    sleep 15s
     sudo apt-get autoremove
+    sleep 15s
 done
 
 sudo apt-get autoremove
@@ -204,6 +208,7 @@ for i in "${mod_remove[@]}"
 do
     echo "$i"
     sudo rmmod "$i"
+    sleep 15s
 done
 
 # remove snapd and all snaps
@@ -214,8 +219,8 @@ for i in "${mod_remove[@]}"
 do
     echo "$i"
     sudo snap remove --purge "$i"
+    sleep 15s
 done
-
 
 # configure clamav
 # mkdir -m 0770 -p /var/lib/fangfrisch
